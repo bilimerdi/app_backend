@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Hastalar extends BaseEntity {
+public class User extends BaseEntity {
     @Id
     @Column(name = "Dosya NO ")
     private Long id;
