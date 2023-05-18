@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @Table(name = "Hastalar")
 public class User extends BaseEntity {
+
     @Id
     @SequenceGenerator(name = "user_seq_sen" , sequenceName = "user_gen",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_seq_gen")

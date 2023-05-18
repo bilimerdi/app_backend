@@ -36,4 +36,21 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public User updateUser(Long id, User user) {
+        Optional<User> resultUser = userRepository.findById(id);
+        if(resultUser.isPresent()){
+            resultUser.get().setFullName(user.getFullName());
+            resultUser.get().setTC(user.getTC());
+            resultUser.get().setDiagnosis(user.getDiagnosis());
+            resultUser.get().setDetail(user.getDetail());
+            resultUser.get().setUpdateAt(new Date());
+            resultUser.get().setImage(user.getImage());
+            resultUser.get().setUpdateBy("Admin");
+            return userRepository.save(resultUser.get());
+
+        }
+        return null;
+    }
 }
