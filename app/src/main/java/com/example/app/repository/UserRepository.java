@@ -3,6 +3,6 @@ package com.example.app.repository;
 import com.example.app.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UseRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
 }

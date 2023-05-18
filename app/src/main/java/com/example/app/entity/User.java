@@ -1,14 +1,15 @@
 package com.example.app.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "Hastalar")
 public class User extends BaseEntity {
     @Id
+    @SequenceGenerator(name = "user_seq_sen" , sequenceName = "user_gen",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_seq_gen")
     @Column(name = "Dosya NO ")
     private Long id;
     @Column(name = "Hasta Ad Soyad", length = 100)
@@ -17,7 +18,7 @@ public class User extends BaseEntity {
     private String TC;
     @Column(name = "Tanı Başlığı", length = 200)
     private String diagnosis;
-    @Column(name = "Tanı Detayı",length = 1000)
+    @Column(name = "Tanı Detayı",length = 200)
     private String detail;
     @Column(name = "Resim")
     private byte[] Image ;
