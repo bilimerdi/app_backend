@@ -3,28 +3,23 @@ package com.example.app.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
-import java.awt.*;
-import java.sql.Time;
+import lombok.Data;
 
 @Entity
-public class Hastalar {
+@Data
+public class Hastalar extends BaseEntity {
     @Id
     @Column(name = "Dosya NO ")
     private Long id;
-    @Column(name = "Hasta Ad Soyad")
+    @Column(name = "Hasta Ad Soyad", length = 100)
     private String fullName;
-    @Column(name="TC")
+    @Column(name="TC", length = 11)
     private String TC;
-    @Column(name = "Tanı Başlığı")
-    private String tani;
-    @Column(name = "Tanı Detayı")
-    private String taniDetay;
-    @Column(name = "Oluşturulan Tarih")
-    private byte[] Image ;
+    @Column(name = "Tanı Başlığı", length = 200)
+    private String diagnosis;
+    @Column(name = "Tanı Detayı",length = 1000)
+    private String detail;
     @Column(name = "Resim")
-    private Time time;
-    @Column(name = "Laborant Ad Soyad")
-    private String labFullname;
+    private byte[] Image ;
 
 }
