@@ -46,11 +46,21 @@ public class UserServiceImpl implements UserService {
             resultUser.get().setDiagnosis(user.getDiagnosis());
             resultUser.get().setDetail(user.getDetail());
             resultUser.get().setUpdateAt(new Date());
-            resultUser.get().setImage(user.getImage());
+//            resultUser.get().setImage(user.getImage());
             resultUser.get().setUpdateBy("Admin");
             return userRepository.save(resultUser.get());
-
         }
         return null;
     }
+
+    @Override
+    public Boolean deleteUser(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if(user.isPresent()){
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
 }
