@@ -3,10 +3,9 @@ package com.example.app.api;
 import com.example.app.entity.User;
 import com.example.app.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -25,4 +24,9 @@ public class UserController {
         return ResponseEntity.ok(resultUser);
     }
 
+    @GetMapping("/getAll")
+    public ResponseEntity <List<User>> getUsers(){
+        List<User> users= userService.getUsers();
+        return ResponseEntity.ok(users);
+    }
 }
