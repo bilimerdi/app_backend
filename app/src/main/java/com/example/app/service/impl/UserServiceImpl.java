@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
             resultUser.get().setDiagnosis(user.getDiagnosis());
             resultUser.get().setDetail(user.getDetail());
             resultUser.get().setUpdateAt(new Date());
+            resultUser.get().setAssistant(user.getAssistant());
 //            resultUser.get().setImage(user.getImage());
             resultUser.get().setUpdateBy("Admin");
             return modelMapper.map(userRepository.save(resultUser.get()),UserDto.class);
@@ -69,5 +70,14 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+        @Override
+        public List<UserDto> getAssistant(String assistant) {
+        List<User> users = userRepository.findByAssistant(assistant);
+        List<UserDto> userDtos = users.stream()
+                .map(user -> modelMapper.map(user,UserDto.class))
+                .collect(Collectors.toList());
+        return userDtos;
+        }
 
 }

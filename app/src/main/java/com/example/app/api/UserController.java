@@ -37,6 +37,12 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/getByAssistant/{assistant}")
+    public ResponseEntity <List<UserDto>> getAssistant(@PathVariable("assistant") String assistant){
+        List<UserDto> user = userService.getAssistant(assistant);
+        return ResponseEntity.ok(user);
+    }
+
     @PutMapping("/edit/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id,@RequestBody  UserDto user){
         UserDto resultUser = userService.updateUser(id,user);

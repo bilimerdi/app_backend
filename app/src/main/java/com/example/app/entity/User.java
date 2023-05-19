@@ -21,6 +21,8 @@ public class User extends BaseEntity {
     private String diagnosis;
     @Column(name = "Tanı Detayı",length = 200)
     private String detail;
+    @Column(name="Laborant Ad Soyad", length=100)
+    private String assistant;
 //    @Column(name = "Resim")
 //    private byte[] Image ;
 

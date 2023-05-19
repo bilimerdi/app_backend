@@ -3,6 +3,9 @@ package com.example.app.repository;
 import com.example.app.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import java.util.List;
+import java.util.Optional;
 
+public interface UserRepository extends JpaRepository<User, Long> {
+    List<User> findByAssistant(String assistant);
 }

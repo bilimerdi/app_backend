@@ -11,4 +11,6 @@ public interface UserService {
     UserDto getUser(Long id);
     UserDto updateUser(Long id,UserDto user);
     Boolean deleteUser(Long id);
+
+    List<UserDto> getAssistant(String assistant);
 }

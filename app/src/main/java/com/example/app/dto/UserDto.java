@@ -9,5 +9,6 @@ public class UserDto {
     private String TC;
     private String diagnosis;
     private String detail;
+    private String assistant;
 //    private byte[] Image ;
 }
