@@ -1,7 +1,6 @@
 package com.example.app.api;
 
 import com.example.app.dto.UserDto;
-import com.example.app.entity.User;
 import com.example.app.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +39,17 @@ public class UserController {
     @GetMapping("/getByAssistant/{assistant}")
     public ResponseEntity <List<UserDto>> getAssistant(@PathVariable("assistant") String assistant){
         List<UserDto> user = userService.getAssistant(assistant);
+        return ResponseEntity.ok(user);
+    }
+    @GetMapping("/getByTc/{TC}")
+    public ResponseEntity <List<UserDto>> getTc(@PathVariable("TC") String TC){
+        List<UserDto> user = userService.getTC(TC);
+        return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/getByFullname/{fullName}")
+    public ResponseEntity <List<UserDto>> getName(@PathVariable("fullName") String fullName){
+        List<UserDto> user = userService.getName(fullName);
         return ResponseEntity.ok(user);
     }
 

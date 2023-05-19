@@ -71,13 +71,31 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-        @Override
-        public List<UserDto> getAssistant(String assistant) {
+    @Override
+    public List<UserDto> getAssistant(String assistant) {
         List<User> users = userRepository.findByAssistant(assistant);
         List<UserDto> userDtos = users.stream()
                 .map(user -> modelMapper.map(user,UserDto.class))
                 .collect(Collectors.toList());
         return userDtos;
         }
+
+    @Override
+    public List<UserDto> getTC(String TC) {
+        List<User> users = userRepository.findByTC(TC);
+        List<UserDto> userDtos = users.stream()
+                .map(user -> modelMapper.map(user, UserDto.class))
+                .collect(Collectors.toList());
+        return userDtos;
+    }
+
+    @Override
+    public List<UserDto> getName(String fullName) {
+        List<User> users = userRepository.findByFullName(fullName);
+        List<UserDto> userDtos = users.stream()
+                .map(user -> modelMapper.map(user,UserDto.class))
+                .collect(Collectors.toList());
+        return userDtos;
+    }
 
 }
