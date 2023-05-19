@@ -52,6 +52,18 @@ public class UserController {
         List<UserDto> user = userService.getName(fullName);
         return ResponseEntity.ok(user);
     }
+    @GetMapping("/sortByDateDesc")
+    public ResponseEntity<List<UserDto>> getUsersSortedByDateDesc() {
+        List<UserDto> userList = userService.getUsersSortedByDateDesc();
+        return ResponseEntity.ok(userList);
+    }
+
+    @GetMapping("/sortByDateAsc")
+    public ResponseEntity<List<UserDto>> getUsersSortedByDateAsc() {
+        List<UserDto> userList = userService.getUsersSortedByDateAsc();
+        return ResponseEntity.ok(userList);
+    }
+
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id,@RequestBody  UserDto user){

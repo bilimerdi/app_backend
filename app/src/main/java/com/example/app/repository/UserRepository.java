@@ -9,5 +9,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByAssistant(String assistant);
     List<User> findByTC(String TC);
     List<User> findByFullName(String fullName);
+    List<User> findAllByOrderByCreatedDateDesc();
+    List<User> findAllByOrderByCreatedDateAsc();
+
+
 }
 

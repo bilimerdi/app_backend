@@ -13,4 +13,6 @@ public interface UserService {
     List<UserDto> getAssistant(String assistant);
     List<UserDto> getTC(String TC);
     List<UserDto> getName(String fullName);
+    List<UserDto> getUsersSortedByDateDesc();
+    List<UserDto> getUsersSortedByDateAsc();
 }

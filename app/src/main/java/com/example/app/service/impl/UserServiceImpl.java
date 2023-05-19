@@ -98,4 +98,23 @@ public class UserServiceImpl implements UserService {
         return userDtos;
     }
 
+    @Override
+    public List<UserDto> getUsersSortedByDateDesc() {
+        List<User> sortedUsers = userRepository.findAllByOrderByCreatedDateDesc();
+        List<UserDto> sortedDtos = sortedUsers.stream()
+                .map(user -> modelMapper.map(user,UserDto.class))
+                .collect(Collectors.toList());
+        return sortedDtos;
+    }
+
+    @Override
+    public List<UserDto> getUsersSortedByDateAsc() {
+        List<User> sortedUsers = userRepository.findAllByOrderByCreatedDateAsc();
+        List<UserDto> sortedDtos = sortedUsers.stream()
+                .map(user -> modelMapper.map(user,UserDto.class))
+                .collect(Collectors.toList());
+        return sortedDtos;
+    }
+
+
 }
