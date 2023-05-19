@@ -5,12 +5,12 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "Hastalar")
+@Table(name = "HASTALAR")
 public class User extends BaseEntity {
 
     @Id
-    @SequenceGenerator(name = "user_seq_sen" , sequenceName = "user_gen",allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_seq_gen")
+    @SequenceGenerator(name = "user_seq_sen" , sequenceName = "user_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "user_seq_sen")
     @Column(name = "Dosya NO ")
     private Long id;
     @Column(name = "Hasta Ad Soyad", length = 100)
