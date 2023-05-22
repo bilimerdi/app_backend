@@ -19,7 +19,7 @@ public class User extends BaseEntity {
     private String TC;
     @Column(name = "Tanı Başlığı", length = 200)
     private String diagnosis;
-    @Column(name = "Tanı Detayı",length = 200)
+    @Column(name = "Tanı Detayı",length = 1000)
     private String detail;
     @Column(name="Laborant Ad Soyad", length=100)
     private String assistant;
