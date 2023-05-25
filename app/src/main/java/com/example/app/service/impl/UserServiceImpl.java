@@ -7,7 +7,12 @@ import com.example.app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -78,7 +83,7 @@ public class UserServiceImpl implements UserService {
                 .map(user -> modelMapper.map(user,UserDto.class))
                 .collect(Collectors.toList());
         return userDtos;
-        }
+    }
 
     @Override
     public List<UserDto> getTC(String TC) {
@@ -116,5 +121,18 @@ public class UserServiceImpl implements UserService {
         return sortedDtos;
     }
 
+    @Override
+    public String uploadImage(String path, MultipartFile file) throws IOException {
 
+        String name = file.getOriginalFilename();
+        String filePath = path + File.separator + name;
+
+        File f = new File(path);
+        if (!f.exists()){
+            f.mkdir();
+        }
+
+        Files.copy(file.getInputStream(), Paths.get(filePath));
+        return name;
+    }
 }

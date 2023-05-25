@@ -1,11 +1,17 @@
 package com.example.app.api;
 
 import com.example.app.dto.UserDto;
+import com.example.app.entity.FileResponse;
 import com.example.app.service.UserService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.lang.IllegalArgumentException;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -18,6 +24,28 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
+    @Value("${project.image}")
+    private String path;
+
+    @PostMapping("/upload")
+    public ResponseEntity<FileResponse> fileUpload(@RequestParam(value = "image", required = false)MultipartFile image) throws IOException {
+
+        String fileName= null;
+
+
+        if (image == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        try{
+            fileName = this.userService.uploadImage(path, image);
+        }catch (IOException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(new FileResponse(fileName), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(new FileResponse(fileName), HttpStatus.OK);
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto user){
@@ -77,4 +105,6 @@ public class UserController {
         Boolean status = userService.deleteUser(id);
         return ResponseEntity.ok(status);
     }
+
+
 }
