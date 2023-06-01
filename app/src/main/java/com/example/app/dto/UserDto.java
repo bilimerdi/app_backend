@@ -13,4 +13,5 @@ public class UserDto {
     private String diagnosis;
     private String detail;
     private String assistant;
+    private String asjkfkadslkfjsaflk;
 }
