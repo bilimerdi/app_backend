@@ -1,6 +1,7 @@
 package com.example.app.service.impl;
 
 import com.example.app.dto.UserDto;
+import com.example.app.entity.FileResponse;
 import com.example.app.entity.User;
 import com.example.app.repository.UserRepository;
 import com.example.app.service.UserService;
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private FileResponse fileResponse;
 
     @Override
     public UserDto createUser(UserDto userDto) {
@@ -123,8 +125,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String uploadImage(String path, MultipartFile file) throws IOException {
-
-        String name = file.getOriginalFilename();
+        String name = String.valueOf(FileResponse.getCounter()) + ".jpg";
         String filePath = path + File.separator + name;
 
         File f = new File(path);
@@ -135,4 +136,6 @@ public class UserServiceImpl implements UserService {
         Files.copy(file.getInputStream(), Paths.get(filePath));
         return name;
     }
+
+
 }

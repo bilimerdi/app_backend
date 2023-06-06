@@ -28,4 +28,13 @@ public class FileResponse {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
+
+    @Override
+    public String toString(){
+        return String.valueOf(id);
+    }
+
+    public static int getCounter(){
+        return counter;
+    }
 }

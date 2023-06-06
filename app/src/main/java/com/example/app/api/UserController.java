@@ -4,14 +4,16 @@ import com.example.app.dto.UserDto;
 import com.example.app.entity.FileResponse;
 import com.example.app.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.lang.IllegalArgumentException;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -28,7 +30,7 @@ public class UserController {
     @Value("${project.image}")
     private String path;
 
-    @PostMapping("/upload")
+    @PostMapping("/image/upload")
     public ResponseEntity<FileResponse> fileUpload(@RequestParam(value = "image", required = false)MultipartFile image) throws IOException {
 
         String fileName= null;
@@ -44,6 +46,40 @@ public class UserController {
             return new ResponseEntity<>(new FileResponse(fileName), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(new FileResponse(fileName), HttpStatus.OK);
+    }
+
+    @GetMapping("/image/{id}")
+    public ResponseEntity<UrlResource> getImageById(@PathVariable("id") int id) throws IOException {
+
+        String imagePath = path + File.separator + id + ".jpg";
+
+        File file = new File(imagePath);
+        if (!file.exists()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        UrlResource resource = new UrlResource(file.toURI());
+        MediaType mediaType = MediaType.IMAGE_JPEG; // Resim dosyası için MIME türü
+
+        return ResponseEntity.ok()
+                .contentType(mediaType)
+                .body(resource);
+    }
+
+    @DeleteMapping("/image/remove/{id}")
+    public ResponseEntity<String> deleteImageById(@PathVariable("id") int id) {
+        String imagePath = path + File.separator + id + ".jpg";
+        File file = new File(imagePath);
+
+        if (file.exists()) {
+            if (file.delete()) {
+                return new ResponseEntity<>("Resim başarıyla silindi", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Resim silme hatası", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } else {
+            return new ResponseEntity<>("Resim bulunamadı", HttpStatus.NOT_FOUND);
+        }
     }
 
 
