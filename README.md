@@ -1,4 +1,4 @@
-# Proje Adı: Report-WebSite
+# Proje Adı: app
 
 Bu proje, özgür Yazılım A.Ş. staj başvurumun değerlendirilmesi için geliştirdiğim bir laboratuvar raporlama uygulamasıdır. Proje, Spring, JPA, Maven ve React teknolojilerini kullanmaktadır.
 
